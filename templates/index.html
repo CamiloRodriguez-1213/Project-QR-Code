@@ -1,0 +1,46 @@
+{% extends 'base/base.html'%}
+
+{% block librerias %}
+    <title>Inicio - MyApp</title>
+{% endblock %}
+{% block navbar %}
+    
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5" >
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        {% for image in images %}
+            <div class="col">
+                <div class="card">
+                    <div class="btn-group dropleft my-1" style="display: flex; justify-content: end;"> 
+                        <i class="fa fa-ellipsis-v py-1 ml-2" style="width: 20px; height: 20px; font-size:20px" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{{url_for('viewImage',url=image[2])}}">Ver</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('downloadImage',url=image[2])}}">Descargar</a></li>
+                        </ul>
+                    </div>
+                    <img src="./static/images/{{image[2]}}" style="width: auto;" class="card-img-top" alt="{{image[1]}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{image[1]}}</h5>
+                        <p class="card-text">{{image[5]}}</p>
+                        <p class="card-text">Fecha : {{image[6]}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+
+{% block footer %}
+
+
+{% endblock %}
+

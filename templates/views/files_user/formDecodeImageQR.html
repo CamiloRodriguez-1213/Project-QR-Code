@@ -1,0 +1,58 @@
+{% extends 'base/base.html'%}
+{% block librerias %}
+<title>Upload - MyApp</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+{% endblock %}
+{% block contenido %}
+<div class="container py-5 col-10 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+    <div class="card">
+        <div class="card-header bg-dark text-white text-center">
+            <i class='fa fa-user'>&nbsp;</i>Escanear Imagen
+        </div>
+        
+        <div class="card-body" style="padding-top: 20px; ">
+            <form class="form form-center" id="formImage" method="post" enctype="multipart/form-data">
+                
+                <input type="file" class="form-control my-3" accept="image/png,image/jpeg,image/jpg,image/gif" multiple required id="image_decode" name="image_decode">
+                <hr>
+                <div class="center">
+                    <div id="preview">
+
+                    </div>
+                </div>
+                {% if response %}
+                <input type="text" class="form-control" value="{{response}}">
+                {% endif %}
+                <button type="submit" class="btn btn-outline-danger" tabindex="2" style="width: 100%;">Escanear</button>
+                
+            </form>
+            
+            <p class="card-text mt-3 text-center" >
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                    <ul class="alert alert-danger">
+                        {% for message in messages %}
+                        <li style="padding-left: 10px; list-style: none;"><small>{{message}}</small></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% endwith %}   
+                {% with messages = get_flashed_messages(category_filter=["good"]) %}
+                    {% if messages %}
+                    <ul class="alert alert-success text-center">
+                        {% for message in messages %}
+                        <li style="padding-left: 10px; list-style: none;"><small>{{message}}</small></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% endwith %}  
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="./static/js/showImage.js"></script>
+{% endblock %}
