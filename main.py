@@ -1,4 +1,4 @@
-from flask import Flask, jsonify,render_template,request,redirect,session,url_for
+from flask import Flask, flash, jsonify,render_template,request,redirect,session,url_for
 from controllers import loginUserController, restorePasswordController,validateTokenController,convertUrlShortToLargeController,userController
 from controllers import qrCodeGeneratorController,showImagesController,optionsImageController,qrDecodeImageController,downloadImageController,newShortUrlController
 from controllers import countQrAndShortenersUserController,showUrlsUserController,editimageController,deleteUrlUserController
@@ -10,6 +10,7 @@ app.secret_key = 'fjifjidfjied5df45df485h48@'
 @app.route("/", methods=["GET", "POST"])
 def index():
     images = showImagesController.showImages()
+    
     return render_template("index.html",images=images)
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
@@ -143,9 +144,10 @@ def createShortener():
 @app.route("/short/<shortened>", methods=["GET","POST"])
 def redirection(shortened):
     print(shortened)
-    result = convertUrlShortToLargeController.convertUrl(shortened)
-    
-    return redirect(result[3], code=302)
+    if request.method == "GET":
+        result = convertUrlShortToLargeController.convertUrl(shortened)    
+        return redirect(result[3], code=302)
+    return render_template("views/shorteners/create.html")
 @app.route("/myProfile", methods=["GET","POST"])
 def myProfile():
     if verifyLogin():
