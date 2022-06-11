@@ -141,7 +141,7 @@ def createShortener():
         short_url = newShortUrlController.newShort(large_url)
         return render_template("views/shorteners/create.html",short_url=short_url,large_url=large_url)
     return render_template("views/shorteners/create.html")
-@app.get("/short/<shortened>")
+@app.route("/short/<shortened>", methods=["GET","POST"])
 def redirection(shortened):
     result = convertUrlShortToLargeController.convertUrl(shortened)
     res= result[3]
