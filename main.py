@@ -144,7 +144,8 @@ def createShortener():
 @app.get("/short/<shortened>")
 def redirection(shortened):
     result = convertUrlShortToLargeController.convertUrl(shortened)
-    return redirect(result[3])
+    res= result[3]
+    return redirect(res)
 @app.route("/myProfile", methods=["GET","POST"])
 def myProfile():
     if verifyLogin():
