@@ -17,7 +17,7 @@
                     <div class="btn-group dropleft my-1" style="display: flex; justify-content: end;"> 
                         <i class="fa fa-ellipsis-v py-1 ml-2" style="width: 20px; height: 20px; font-size:20px" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{url_for('viewImage',url=image[2])}}">Ver</a></li>
+                            <li><a class="dropdown-item" href="https://project-qr-code-flask.herokuapp.com/{{image[2])}}" target="_blank">Ver</a></li>
                             <li><button type="button" class="dropdown-item" onclick="download('{{image[2]}}')" target="_blank" name="descargar" id="descargar">Descargar</button></li>
                         </ul>
                     </div>
