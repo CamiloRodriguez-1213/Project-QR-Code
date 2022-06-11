@@ -3,7 +3,7 @@ cursor = db.cursor()
 def deleteUrl(id):
     try:
         id=int(id)
-        cursor.execute("DELETE FROM shortener where id_image = %s",(id,))
+        cursor.execute("DELETE FROM shortener where id_shortener = %s",(id,))
         db.commit()
         return True
     except:
