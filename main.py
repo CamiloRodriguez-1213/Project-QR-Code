@@ -115,7 +115,7 @@ def deleteImage(id):
 @app.get("/deleteUrl/<id>")
 def deleteUrl(id):
     deleteUrlUserController.deleteUrl(id)
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('myURls'))
 @app.get("/downloadImage/<url>")
 def downloadImage(url):
     downloadImageController.downloadImage(url)
