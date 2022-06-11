@@ -141,13 +141,12 @@ def createShortener():
         short_url = newShortUrlController.newShort(large_url)
         return render_template("views/shorteners/create.html",short_url=short_url,large_url=large_url)
     return render_template("views/shorteners/create.html")
-@app.route("/short/<shortened>", methods=["GET","POST"])
+@app.get("/short/<shortened>")
 def redirection(shortened):
-    print(shortened)
-    if request.method == "GET":
-        result = convertUrlShortToLargeController.convertUrl(shortened)    
-        return redirect(result[3], code=302)
-    return render_template("views/shorteners/create.html")
+
+    result = convertUrlShortToLargeController.convertUrl(shortened)
+    
+    return redirect(result[3], code=302)
 @app.route("/myProfile", methods=["GET","POST"])
 def myProfile():
     if verifyLogin():
