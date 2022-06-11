@@ -9,7 +9,7 @@ def QRCodeGenerator(url,description,color,size):
     qr.make(fit=True)
     
     img = qr.make_image(fill_color = color, back_color = 'white' )
-    img.save('/static/images/'+tiempo+'.png')
+    img.save('./static/images/'+tiempo+'.png')
     user = session['token']
     route = tiempo+'.png'
     if createNewImageModel.setNewImage(description,route,user,url):
