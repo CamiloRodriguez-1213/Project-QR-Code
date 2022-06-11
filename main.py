@@ -22,7 +22,6 @@ def dashboard():
 def myURls():
     if verifyLogin():
         urls = showUrlsUserController.showUrlsUserController()
-        print(urls)
         return render_template("/views/dashboard/urls-short.html",urls=urls)
     else:
         return redirect("signin")
@@ -143,9 +142,10 @@ def createShortener():
     return render_template("views/shorteners/create.html")
 @app.route("/short/<shortened>", methods=["GET","POST"])
 def redirection(shortened):
+    print(shortened)
     result = convertUrlShortToLargeController.convertUrl(shortened)
-    res= result[3]
-    return redirect(res)
+    res= str(result[3])
+    return redirect(res,code=302)
 @app.route("/myProfile", methods=["GET","POST"])
 def myProfile():
     if verifyLogin():
