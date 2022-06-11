@@ -16,6 +16,6 @@ def deleteImageUser(id):
 def changeImageStatus(id,status):
     try:
         user = session['token']
-        updateStatusImageModel.changeStatus(id,status,user)
+        updateStatusImageModel.changeStatusOne(id,status,user)
     except:
         print("Error occured in changeImageStatus")

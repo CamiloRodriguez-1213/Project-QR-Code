@@ -1,32 +1,22 @@
 {% extends 'base/base.html'%}
 {% block librerias %}
-<title>Scan QR - MyApp</title>
+<title>Upload - MyApp</title>
 <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
 {% endblock %}
 {% block contenido %}
-<div class="container py-5 col-10 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+<div class="container py-5 col-10 col-sm-10 col-md-8 col-lg-5 col-xl-3">
     <div class="card">
         <div class="card-header bg-dark text-white text-center">
-            <i class='fa fa-user'>&nbsp;</i>Escanear Imagen
+            <i class='fa fa-user'>&nbsp;</i>Nuevo Producto
         </div>
         
         <div class="card-body" style="padding-top: 20px; ">
-            <form class="form form-center" id="formImage" method="post" enctype="multipart/form-data">
+            <form class="form form-center" method="post"  action="{{url_for('newUpload')}}" enctype="multipart/form-data">
+                <input type="text" autofocus class="form-control" required name="name_product" placeholder="Ingrese una descripción" tabindex="1" >
+                   
+                <input type="file" class="form-control my-3" accept="image/png,image/jpeg,image/jpg,image/gif" required name="imagen">
+                <button type="submit" class="btn btn-outline-danger" tabindex="2" style="width: 100%;">Subir archivo</button>
                 
-                <input type="file" class="form-control my-3" accept="image/png,image/jpeg,image/jpg,image/gif" multiple required id="image_decode" name="image_decode">
-                <hr>
-                <div class="center">
-                    <div id="preview">
-
-                    </div>
-                </div>
-                {% if response %}
-                
-                <input type="text" class="form-control" value="{{response}}">
-                <a type="button" class="btn btn-outline-success" tabindex="2" style="width: 100%;" target="_blank" href="{{response}}">Ir al enlace</a>
-                {% else %}
-                <button type="submit" class="btn btn-outline-danger" tabindex="2" style="width: 100%;">Decodificar</button>
-                {% endif %}
             </form>
             
             <p class="card-text mt-3 text-center" >
@@ -54,7 +44,4 @@
 
 </div>
 
-{% endblock %}
-{% block scripts %}
-<script src="./static/js/showImage.js"></script>
 {% endblock %}

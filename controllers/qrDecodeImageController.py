@@ -1,4 +1,3 @@
-
 from flask import flash,session
 from pyzbar.pyzbar import decode
 from PIL import Image
@@ -7,11 +6,8 @@ def uploadImage(fileProduct):
     try:
         if fileProduct and verifyExtend(fileProduct.filename):
             decoded = decode(Image.open(fileProduct))
-            print(decoded)
             data = decoded[0].data.decode('utf-8')
-            
             return data
-            print("asd")
         else:
             flash('Tipo de archivo no admitido','wrong')
     except:

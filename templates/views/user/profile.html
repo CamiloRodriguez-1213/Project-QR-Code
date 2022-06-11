@@ -1,0 +1,73 @@
+{% extends 'base/base.html'%}
+{% block titulo %}
+    Mi Perfil
+{% endblock %}
+{% block contenido %}
+<div class="container py-5 my-5 col-lg-8 ">
+    <div class="accordion accordion-flush" style="background-color: black;" id="accordionFlushExample">
+        <div class="accordion-item" >
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed bg-dark text-white"  type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              Mis datos
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body center">
+               <div class="row ">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col">
+                        <label for="">Nombre</label>
+                        <input type="text" class="form-control" value="{{user[0]}}" readonly>
+                      </div>
+                      <div class="col">
+                        <label for="">E-mail</label>
+                           <input type="text" class="form-control" value="{{user[1]}}" readonly>
+                      </div>
+                    </div>
+                  
+                  </div>
+               </div>
+               <p class="card-text mt-3 text-center">
+                <small>
+                    <a href="{{url_for('restorePassword')}}">¿Olvidaste tu contraseña?</a></small>
+                </small>
+            </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed  bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Total de archivos subidos
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body center">
+              <div class="row ">
+                 <div class="col">
+                   <div class="row">
+                     <div class="col">
+                       <label for=""><strong>Códigos QR</strong></label>
+                       <a style="outline: none;" href="{{url_for('dashboard')}}">Mostrar</a>
+                       <input type="text" class="form-control" value="{{num_qr[0]}}" readonly>
+                     </div>
+                     <div class="col">
+                       <label for="">URls Acortadas</label>
+                       <a style="outline: none;" href="{{url_for('myURls')}}">Mostrar</a>
+                          <input type="text" class="form-control" value="{{num_short[0]}}" readonly>
+                     </div>
+                   </div>
+                 
+                 </div>
+              </div>
+           </div>
+          </div>
+        </div>
+        
+      </div>
+</div>
+{% endblock %}
+
+
+

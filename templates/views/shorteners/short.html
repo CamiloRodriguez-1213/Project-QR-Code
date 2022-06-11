@@ -1,0 +1,94 @@
+{% extends 'base/base.html'%}
+
+{% block librerias %}
+    <title>Inicio - MyApp</title>
+{% endblock %}
+{% block navbar %}
+    
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container">
+    <div class="row py-5">
+        <h1 class="text-center">ACORTADOR DE ENLACES</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="post" action="{{url_for('createShortener')}}">
+                <div class="mb-3">
+                    <label for="url" class="form-label">Ingrese Dirección Url</label>
+                    
+                    <div class="input-group mb-3">
+                        <input type="text" autofocus class="form-control" name="dirUrl" id="url" placeholder="Ingresa la dirección o url que quieras acortar https://www.example.com/">
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-danger" type="button">Acortar</button>
+                        </div>
+                    </div>  
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row py-5"></div>
+    <div class="row py-5"></div>
+    <div class="row py-5"></div>
+    <div class="row py-3"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function copyToClipBoard() {
+        var content = document.getElementById('url');
+        content.select();
+        document.execCommand('copy');
+        alert("Copied!");
+        
+    }
+</script>
+{% endblock %}
+
+
+{% block footer %}
+<footer class="bd-footer py-4 mt-3 bg-light">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-6 col-lg-3 offset-lg-1">
+            <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" alt="ITP" width="150" height="150">
+        </div>
+        <div class="col-6 col-lg-3 offset-lg-1">
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                <h3>Universidad</h3>
+            </a>
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                Facultad de Ciencias
+            </a><br>
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                Ingeniería de Sistemas
+            </a><br>
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                Instituto Tecnológico del Putumayo
+            </a>
+            
+        </div>
+        <div class="col-6 col-lg-3 offset-lg-1">
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                <h3>Desarrolladores</h3>
+            </a>
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                Andrés Camilo Rodriguez
+            </a><br>
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+                Lauro Armando Mena
+            </a><br>
+            <a class="align-items-center link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+            </a>  
+        </div>
+      </div>
+      
+    </div>
+</footer>
+
+
+{% endblock %}
+

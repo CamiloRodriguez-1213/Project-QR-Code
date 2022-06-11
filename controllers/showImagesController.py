@@ -1,4 +1,4 @@
-from flask import flash,session
+from flask import session
 from models import getImagesModel
 def showImages():
     try:

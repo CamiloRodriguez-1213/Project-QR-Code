@@ -26,19 +26,22 @@
                 </ul>
             
                 <form class="d-flex">
-                {% if 'token' in session %}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{url_for('shortener')}}">Acortador de enlaces </a>
+                        </li>
+                        {% if 'token' in session %}
                         
                         <li class="nav-item dropdown dropstart">
                             <a class="nav-link active dropdown-toggle" type="button" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <strong>Explorar</strong>
+                                Explorar
                             </a>
                             
                             <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{url_for('dashboard')}}">Mis archivos</a></li>
+                                <li><a class="dropdown-item" href="{{url_for('myURls')}}">Urls acortadas</a></li>
                                 <li><a class="dropdown-item" href="{{url_for('index')}}">Descrubir Fotos</a></li>
-                                <li><a class="dropdown-item" href="#">Busquedas populares</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -47,24 +50,23 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{url_for('decodeQR')}}"><strong>Escanear Archivo</strong></a>
                         </li>
-                        
                         <li class="nav-item dropdown ">
                             <a class="nav-link active " href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user-circle" style="font-size:25px"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item disabled" href="#">{{session['user']}} </a></li>
-                                <li><a class="dropdown-item" href="#">Account</a></li>
-                                <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                                <li><a class="dropdown-item disabled"  href="#">{{session['user']}} </a></li>
+                                
+                                <li><a class="dropdown-item" href="{{url_for('myProfile')}}">Mi perfil</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
                             </ul>
                         </li>
                         
+                        {% else %}
                     </ul>
                    
-                {% else %}
                     
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">

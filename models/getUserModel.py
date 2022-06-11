@@ -14,3 +14,10 @@ def user(email):
     except: 
         print("Error occured in getUserModel")
         return flash('El email '+email+' no está registrado','error')
+def userID(id):
+    try:
+        cursor.execute("SELECT name,email FROM users WHERE id_user = '"+id+"'")
+        myresult = cursor.fetchone()
+        return myresult
+    except: 
+        print("Error occured in getUserModelUserId")

@@ -1,0 +1,60 @@
+{% extends 'base/base.html'%}
+
+
+{% block librerias %}
+<title>My URLs - MyApp</title>
+{% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block contenido %}
+
+<div class="container mt-5" >
+    <p class="card-text mt-3 text-center" >
+        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+            {% if messages %}
+            <ul class="alert alert-danger">
+                {% for message in messages %}
+                <li style="padding-left: 10px; list-style: none;"><small>{{message}}</small></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}   
+        {% with messages = get_flashed_messages(category_filter=["good"]) %}
+            {% if messages %}
+            <ul class="alert alert-success text-center">
+                {% for message in messages %}
+                <li style="padding-left: 10px; list-style: none;"><small>{{message}}</small></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}  
+    </p>
+    <div class="">
+        <table id='empTable' class='table display dataTable' width='100%'>
+            <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Url Original</th>
+                <th colspan="3">Url Acortada</th>
+                <th>Fecha de creación</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+                {% set count = namespace(a=1) %}
+                {% for url in urls %}
+                <tr>
+                <td><input type="text" class="form-control" style="width: 50px !important;" value="{{ count.a }}" readonly></td>
+                <td><input type="text" class="form-control" value="{{url[3]}}" readonly></td>
+                <td colspan="3"><input type="text" class="form-control" value="https://project-qr-code-flask.herokuapp.com/{{url[1]}}" readonly></td>
+                <td><input type="text" class="form-control" value="{{url[4]}}" readonly></td>
+                <td><a class="button" href="{{url_for('deleteUrl',id=url[0])}}"><i class='fa fa-trash' style='font-size:24px;color: red;'></i></a></td>
+            </tr>
+                    {% set count.a = count.a + 1 %}
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

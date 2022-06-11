@@ -6,19 +6,19 @@ def getImages():
         myresult = cursor.fetchall()
         return myresult
     except: 
-        print("Error occured in getImagen")
+        print("Error occured in getImagesModel")
 def getImagesUser(token):
     try:
         token = str(token)
-        cursor.execute("SELECT * FROM images,users WHERE images.user = '"+token+"' ")
+        cursor.execute("SELECT * FROM images WHERE images.user = '"+token+"' ")
         myresult = cursor.fetchall()
         return myresult
     except: 
-        print("Error occured in getImagen")
+        print("Error occured in getImagesModeluser")
 def getImagesId(id):
     try:
-        cursor.execute("SELECT * FROM images,users WHERE images.id_image = '"+id+"' ")
+        cursor.execute("SELECT * FROM images WHERE images.id_image = '"+id+"' ")
         myresult = cursor.fetchone()
         return myresult
     except: 
-        print("Error occured in getImagenId")
+        print("Error occured in getImagesModelID")

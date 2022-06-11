@@ -56,7 +56,7 @@ def signup(name,email,password):
                 token = generateNewTokenModel.newToken()
                 
                 asunto = "Hola "+name+", te damos la bienvenida a nuestra página"
-                content = "<h2>Bienvenido a My-App "+name+" </h2>\n<h4>Activa tu cuenta dando clic al siguiente botón </h4>\n<a target='_blank' href='http://localhost:5000/authToken/"+token+"'><button>Activa tu cuenta</button></a>"
+                content = "<h2>Bienvenido a My-App "+name+" </h2>\n<h4>Activa tu cuenta dando clic al siguiente botón </h4>\n<a target='_blank' href='https://project-qr-code-flask.herokuapp.com/authToken/"+token+"'><button>Activa tu cuenta</button></a>"
                 emailReceived = createSendEmailModel.sendMail(asunto,email,content)
                 emailReceived = True
                 if emailReceived == True:

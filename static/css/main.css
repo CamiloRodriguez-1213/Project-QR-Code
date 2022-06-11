@@ -11,3 +11,7 @@ body{
 .center{
   display: flex; justify-content: center;
 }
+.inactivo {
+  background-color: black;
+  opacity: 0.5;
+}

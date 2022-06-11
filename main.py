@@ -1,5 +1,7 @@
 from flask import Flask, jsonify,render_template,request,redirect,session,url_for
-from controllers import loginUserController, restorePasswordController,validateTokenController,qrCodeGeneratorController,showImagesController,optionsImageController,qrDecodeImageController,downloadImageController
+from controllers import loginUserController, restorePasswordController,validateTokenController,convertUrlShortToLargeController,userController
+from controllers import qrCodeGeneratorController,showImagesController,optionsImageController,qrDecodeImageController,downloadImageController,newShortUrlController
+from controllers import countQrAndShortenersUserController,showUrlsUserController,editimageController,deleteUrlUserController
 from controllers.verify_loginController import verifyLogin
 import webbrowser
 
@@ -14,6 +16,14 @@ def dashboard():
     if verifyLogin():
         images = showImagesController.showImagesUser()
         return render_template("/views/dashboard/dashboard.html",images=images)
+    else:
+        return redirect("signin")
+@app.route("/myURls", methods=["GET", "POST"])
+def myURls():
+    if verifyLogin():
+        urls = showUrlsUserController.showUrlsUserController()
+        print(urls)
+        return render_template("/views/dashboard/urls-short.html",urls=urls)
     else:
         return redirect("signin")
 @app.route("/signin", methods=["GET", "POST"])
@@ -52,9 +62,9 @@ def signup():
         email=request.form['email']
         password=request.form['password']
         if loginUserController.signup(name,email,password) == True:
-            return redirect(url_for('signin'))
+            return redirect(url_for('signin',email=email))
         else:
-            return render_template("/views/login/signup.html",email=email)
+            return render_template("/views/login/signup.html",email=email,name=name)
     return render_template("/views/login/signup.html")
 @app.route("/authToken/<token>", methods=["GET", "POST"])
 def authToken(token):
@@ -87,6 +97,14 @@ def generateQR():
 def editImage(id):
     images = showImagesController.showImagesEdit(id)
     return render_template("/views/products/formEditImage.html",images=images)
+@app.post("/editImage/")
+def editImagePost():
+    if request.method == 'POST':
+        id = request.form['id']
+        estado = request.form['estado']
+        nameProduct = request.form['name_product']
+        editimageController.editImage(nameProduct,id,estado)
+    return redirect(url_for('dashboard'))
 @app.route("/changeStatus/<id>/<status>", methods=["GET","POST"])
 def changeStatus(id,status):
     optionsImageController.changeImageStatus(id,status)
@@ -94,6 +112,10 @@ def changeStatus(id,status):
 @app.get("/deleteImage/<id>")
 def deleteImage(id):
     optionsImageController.deleteImageUser(id)
+    return redirect(url_for('dashboard'))
+@app.get("/deleteUrl/<id>")
+def deleteUrl(id):
+    deleteUrlUserController.deleteUrl(id)
     return redirect(url_for('dashboard'))
 @app.get("/downloadImage/<url>")
 def downloadImage(url):
@@ -104,11 +126,32 @@ def downloadImage(url):
         return redirect(url_for('index  '))
 @app.get("/viewImage/<url>")
 def viewImage(url):
-    
-    webbrowser.open_new_tab('http://localhost:5000/static/images/'+url)
+    webbrowser.open_new_tab('https://project-qr-code-flask.herokuapp.com/static/images/'+url)
     if verifyLogin():
         return redirect(url_for('index'))
     else:
         return redirect(url_for('index'))
-        
-#app.run(debug=True)
+@app.route("/shortener", methods=["GET", "POST"])
+def shortener():
+    return render_template("views/shorteners/short.html")
+@app.route("/createShortener", methods=["GET", "POST"])
+def createShortener():
+    if request.method == 'POST':
+        large_url=request.form['dirUrl']
+        short_url = newShortUrlController.newShort(large_url)
+        return render_template("views/shorteners/create.html",short_url=short_url,large_url=large_url)
+    return render_template("views/shorteners/create.html")
+@app.get("/short/<shortened>")
+def redirection(shortened):
+    result = convertUrlShortToLargeController.convertUrl(shortened)
+    return redirect(result[3])
+@app.route("/myProfile", methods=["GET","POST"])
+def myProfile():
+    if verifyLogin():
+        user = userController.userController()
+        num_qr = countQrAndShortenersUserController.countAllQR()
+        num_short = countQrAndShortenersUserController.countAllShort()
+        return render_template("views/user/profile.html",user=user,num_qr=num_qr,num_short=num_short)
+    else:
+        return redirect(url_for('index'))
+app.run(debug=True)
