@@ -154,4 +154,4 @@ def myProfile():
         return render_template("views/user/profile.html",user=user,num_qr=num_qr,num_short=num_short)
     else:
         return redirect(url_for('index'))
-app.run(debug=True)
+#app.run(debug=True)
